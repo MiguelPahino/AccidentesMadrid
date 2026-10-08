@@ -1,6 +1,6 @@
 package org.example;
 
-import java.io.BufferedReader;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -11,7 +11,6 @@ import java.util.List;
 public class FiltradoCSV {
 
     private static final String CSV_FILE = "accidentesTraficoMadrid.csv";
-    private static final int POSITIVA_DROGA_COLUMN = 18;
 
     public static List<String> accidentesConDrogas() throws IOException {
         return accidentesConDrogas(findCsvPath(Path.of("").toAbsolutePath()));
@@ -20,19 +19,19 @@ public class FiltradoCSV {
     static List<String> accidentesConDrogas(Path csvPath) throws IOException {
         List<String> accidents = new ArrayList<>();
 
-        try (BufferedReader reader = Files.newBufferedReader(csvPath)) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] columns = line.split(";", -1);
-                if (columns.length > POSITIVA_DROGA_COLUMN
-                        && "S".equalsIgnoreCase(columns[POSITIVA_DROGA_COLUMN].trim())) {
+        List<String> lines = Files.readAllLines(csvPath);
+            for(String line : lines){
+                String[] lineList = line.split(";", -1);
+                if(lineList.length > 18 && "S".equals(lineList[18].trim())){
                     accidents.add(line);
                 }
             }
-        }
+        
 
         return accidents;
     }
+
+
 
     static Path findCsvPath(Path startDirectory) throws FileNotFoundException {
         for (Path directory = startDirectory.toAbsolutePath();

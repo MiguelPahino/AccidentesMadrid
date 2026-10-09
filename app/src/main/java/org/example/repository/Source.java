@@ -1,4 +1,4 @@
-package org.example.source;
+package org.example.repository;
 
 import org.example.utils.Utils;
 
@@ -10,6 +10,7 @@ import java.time.format.TextStyle;
 import java.util.*;
 
 public class Source {
+
     public static List<String> accidentesConDrogas() throws IOException {
         List<String> accidents = new ArrayList<>();
         List<String> lines = Files.readAllLines(Utils.findCsvPath(Path.of("").toAbsolutePath()));

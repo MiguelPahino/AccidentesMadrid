@@ -1,6 +1,6 @@
 package org.example;
 
-import org.example.source.Source;
+import org.example.repository.Source;
 
 import java.io.IOException;
 import java.util.List;
